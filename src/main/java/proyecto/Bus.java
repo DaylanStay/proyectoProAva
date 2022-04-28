@@ -1,4 +1,3 @@
-
 package Proyecto;
 
 public class Bus {
@@ -49,6 +48,7 @@ public class Bus {
     public void setCiudadFinal(String ciudadFinal) {
         this.ciudadFinal = ciudadFinal;
     }
+    
     //************************************************************************
     
 }

@@ -1,6 +1,10 @@
 
 package Proyecto;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Conductor {
@@ -25,8 +29,8 @@ public class Conductor {
         buses.addAll(i);
     }
 
-    Conductor() {
-       
+    public Conductor() {
+       buses = new ArrayList();
     }
     
      
@@ -58,10 +62,6 @@ public class Conductor {
         this.edad = edad;
     }
 
-    public ArrayList<Bus> getBuses() {
-        return buses;
-    }
-
     public void setBuses(ArrayList<Bus> buses) {
         this.buses = buses;
     }
@@ -73,8 +73,7 @@ public class Conductor {
     }
     
     public void MostrarBuses(){
-        int flag = 0;
-        
+        //int flag = 0;
         if(buses.isEmpty()){
             System.out.println("El conductor no tiene ningun bus asociado");
         }else{
@@ -87,10 +86,7 @@ public class Conductor {
             }
         
         }
-        
-        
-        
+        //System.out.println("No hay bus asignado")
     }
-    
     
 }

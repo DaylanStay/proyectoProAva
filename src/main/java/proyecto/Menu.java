@@ -11,7 +11,6 @@ public class Menu {
         lec.llenadoConductores();
         int opc;
         BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
-        
         do{
             System.out.println("*******************************************");
             System.out.println("                 Menu                        ");
@@ -32,11 +31,10 @@ public class Menu {
                 case 4: lec.MostrarConductores(); break;
                 case 5: lec.BuscarConductoresRut(); break;
                 case 6: lec.MostrarBusesyConductores(); break;
-                case 0: break;
+                case 0: lec.exportar(); break;
                 default: System.out.println("Invalido"); break;
             }
         }while(opc != 0);
-        
         
     }
 }
