@@ -347,6 +347,45 @@ public class Gestion {
             e.getStackTrace();   
         }
     }
+    
+    public void eliminarConductor() throws IOException{
+        // Lectura
+        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
+        System.out.println("Ingrese el Rut del conductor");
+        String key;
+        key = opc.readLine();
+
+        // Eliminación
+        if(mapConductores.containsKey(key)) {
+            mapConductores.remove(key);
+            System.out.println("El conductor ha sido eliminado correctamente");
+
+        } else{
+            System.out.println("El conductor no existe");
+        }
+    }
+
+    public void eliminarBus() throws IOException{
+        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
+        // Obtener key
+        String key;
+        System.out.println("Ingrese el rut del conductor");
+        key = opc.readLine();
+        // Obtener número del bus
+        int num;
+        System.out.println("Ingrese el bus que desea eliminar del conductor");
+        num = Integer.parseInt(opc.readLine());
+        // Eliminación del bus
+        if(mapConductores.containsKey(key)){
+            if(mapConductores.get(key).eliminarBuses(num)){
+                System.out.println("El bus del conductor ha sido eliminado correctamente");
+            } else {
+                System.out.println("El bus del conductor no existe");
+            }
+        } else{
+            System.out.println("El conductor no existe");
+        }
+    }
 
 }
     

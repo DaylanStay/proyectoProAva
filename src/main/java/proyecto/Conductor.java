@@ -89,4 +89,40 @@ public class Conductor {
         //System.out.println("No hay bus asignado")
     }
     
+    public boolean eliminarBuses(int num){
+            /*
+            //opcion 1
+            for(int j = i ; j < buses.size() - 1 ; j++){
+                // vaciar
+                buses.get(j).setCiudadFinal(null);
+                buses.get(j).setCiudadInicio(null);
+                buses.get(j).setMatricula(null);
+                buses.get(j).setNumeroBus(0);
+
+                // cambiar posicion
+
+                buses.get(j).setCiudadFinal(buses.get(j+1).getCiudadFinal());
+                buses.get(j).setCiudadInicio(buses.get(j+1).getCiudadInicio());
+                buses.get(j).setMatricula(buses.get(j+1).getMatricula());
+                buses.get(j).setNumeroBus(buses.get(j+1).getNumeroBus());
+
+            }
+            // vaciar
+            buses.get(buses.size() - 1).setCiudadFinal(null);
+            buses.get(buses.size() - 1).setCiudadInicio(null);
+            buses.get(buses.size() - 1).setMatricula(null);
+            buses.get(buses.size() - 1).setNumeroBus(0);
+            */
+            // opcion 2
+        boolean existe = false;
+        for(int i = 0 ; i < buses.size() ; i++){
+            if(buses.get(i).getNumeroBus() == num) {
+                buses.remove(i);
+                existe = true;
+                break;
+            } 
+        }
+        return existe;
+    }
+    
 }
