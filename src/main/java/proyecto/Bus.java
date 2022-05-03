@@ -5,7 +5,6 @@ public class Bus {
     private String matricula;
     private String ciudadInicio;
     private String ciudadFinal;
-    //private Pasajero[] pasajeros;
     
     //Metodo Constructor
     public Bus(int numeroBus, String matricula, String ciudadInicio, String ciudadFinal) {
@@ -48,6 +47,8 @@ public class Bus {
     public void setCiudadFinal(String ciudadFinal) {
         this.ciudadFinal = ciudadFinal;
     }
+    
+   
     
     //************************************************************************
     

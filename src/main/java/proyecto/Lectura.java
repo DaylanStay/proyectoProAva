@@ -10,19 +10,13 @@ public class Lectura {
     private String partes[] = null;
     
     //Metodo leer
-    
      public void leerArchivo(String name){
         String c = "Conductores";
          
         try{
             lector = new BufferedReader(new FileReader(("./Archivos/"+name+".csv")));
             while((linea = lector.readLine()) != null){
-                
                 partes = linea.split(",");
-                
-                //System.out.println(partes);
-                //GuardarListConductores(partes);
-                
             }
             lector.close();
             linea = null;
@@ -30,12 +24,5 @@ public class Lectura {
         }catch(IOException e){
             JOptionPane.showMessageDialog(null,e);
         }
-        
-        //System.out.println(bus.getListBuses());
-        
-            //Mostrar();
-
     } 
-    
-    
 }

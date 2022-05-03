@@ -1,10 +1,8 @@
-
 package Proyecto;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Conductor {
@@ -33,10 +31,9 @@ public class Conductor {
        buses = new ArrayList();
     }
     
-     
-    
     //*******************************************************************
     //Metodos Getter & Setter
+    //*******************************************************************
 
     public String getNombre() {
         return nombre;
@@ -65,6 +62,10 @@ public class Conductor {
     public void setBuses(ArrayList<Bus> buses) {
         this.buses = buses;
     }
+
+    public ArrayList<Bus> getBuses() {
+        return buses;
+    }
     
     //**************************************************
     
@@ -72,57 +73,85 @@ public class Conductor {
         buses.add(aa);
     }
     
-    public void MostrarBuses(){
-        //int flag = 0;
+    public String MostrarBuses(){
+        String cadena = "";
         if(buses.isEmpty()){
             System.out.println("El conductor no tiene ningun bus asociado");
         }else{
-                
+
             for(int i = 0; i < buses.size(); i++){
-                System.out.println("Numero de Bus: "+buses.get(i).getNumeroBus());
-                System.out.println("Matricula: "+buses.get(i).getMatricula());
-                System.out.println("Ciudad Salida: "+buses.get(i).getCiudadInicio());
-                System.out.println("Ciudad Destino: "+buses.get(i).getCiudadFinal());
+                cadena += "Número Bus: " + buses.get(i).getNumeroBus() + "\n";
+                cadena += "Matrícula: " + buses.get(i).getMatricula() + "\n";
+                cadena += "Ciudad Inicial: " + buses.get(i).getCiudadInicio() + "\n";
+                cadena += "Ciudad Final: " + buses.get(i).getCiudadFinal() + "\n";
+
             }
-        
+
         }
-        //System.out.println("No hay bus asignado")
+        return cadena;
     }
     
-    public boolean eliminarBuses(int num){
-            /*
-            //opcion 1
-            for(int j = i ; j < buses.size() - 1 ; j++){
-                // vaciar
-                buses.get(j).setCiudadFinal(null);
-                buses.get(j).setCiudadInicio(null);
-                buses.get(j).setMatricula(null);
-                buses.get(j).setNumeroBus(0);
-
-                // cambiar posicion
-
-                buses.get(j).setCiudadFinal(buses.get(j+1).getCiudadFinal());
-                buses.get(j).setCiudadInicio(buses.get(j+1).getCiudadInicio());
-                buses.get(j).setMatricula(buses.get(j+1).getMatricula());
-                buses.get(j).setNumeroBus(buses.get(j+1).getNumeroBus());
-
-            }
-            // vaciar
-            buses.get(buses.size() - 1).setCiudadFinal(null);
-            buses.get(buses.size() - 1).setCiudadInicio(null);
-            buses.get(buses.size() - 1).setMatricula(null);
-            buses.get(buses.size() - 1).setNumeroBus(0);
-            */
-            // opcion 2
-        boolean existe = false;
+    public void eliminarBuses(int num){
         for(int i = 0 ; i < buses.size() ; i++){
             if(buses.get(i).getNumeroBus() == num) {
                 buses.remove(i);
-                existe = true;
                 break;
             } 
         }
-        return existe;
     }
-    
+
+    public void eliminarBuses(String matricula){
+        for(int i = 0 ; i < buses.size() ; i++){
+            if(buses.get(i).getMatricula().equals(matricula)) {
+                buses.remove(i);
+                break;
+            } 
+        }
+    }
+
+    public void editarBuses(int nBus) throws IOException{
+        for(int i = 0 ; i < buses.size() ; i++){
+            if(buses.get(i).getNumeroBus() == nBus) {
+                BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
+                String aux;
+                int opc;
+
+                System.out.println("Ingrese la opcion que desea cambiar:");
+                System.out.println("Opcion 1: Ciudad inicial");
+                System.out.println("Opcion 2: Ciudad final");
+                System.out.println("Opcion 3: Matrícula");
+                opc = Integer.parseInt(leer.readLine());
+
+                switch(opc){
+                    case 1:
+                    {
+                        System.out.println("Ingrese la ciudad inicial");
+                        aux = leer.readLine();
+                        buses.get(i).setCiudadInicio(aux);
+                        break;
+                    }
+                    case 2:
+                    {
+                        System.out.println("Ingrese la ciudad final");
+                        aux = leer.readLine();
+                        buses.get(i).setCiudadFinal(aux);
+                        break;
+                    }
+                    case 3:
+                    {
+                        System.out.println("Ingrese la nueva matrícula");
+                        aux = leer.readLine();
+                        buses.get(i).setMatricula(aux);
+                        break;
+                    }
+                    default: 
+                    {
+                        System.out.println("Invalido");
+                        break;
+                    } 
+                }
+                break;
+            }
+        }
+    }
 }

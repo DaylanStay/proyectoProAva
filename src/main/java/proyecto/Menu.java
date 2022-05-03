@@ -1,11 +1,10 @@
-
 package Proyecto;
 
+import Ventanas.VentanaMain;
 import java.io.*;
 
 public class Menu {
     public static void main(String [] args) throws IOException{
-        
         Gestion lec = new Gestion();
         lec.llenadoBus();
         lec.llenadoConductores();
@@ -17,22 +16,71 @@ public class Menu {
             System.out.println("********************************************");
             System.out.println("Opcion 1: Agregar Conductor");
             System.out.println("Opcion 2: Agregar Bus");
-            System.out.println("Opcion 3: Mostrar Buses");
-            System.out.println("Opcion 4: Mostrar Conductores");
-            System.out.println("Opcion 5: Buscar Conductores Por Rut");
-            System.out.println("Opcion 6: Mostrar Buses Y sus conductores");
-            System.out.println("Opcion 0: Salir");
+            System.out.println("Opcion 3: Buscar Conductores Por Rut");
+            System.out.println("Opcion 4: Menu Mostrar [Interfaz]");
+            System.out.println("Opcion 5: Eliminar Bus");
+            System.out.println("Opcion 6: Eliminar Conductor");
+            System.out.println("Opcion 7: Modificar Conductor");
+            System.out.println("Opcion 8: Modificar Bus");
+            System.out.println("Opcion 9: Exportar Excel");
+            System.out.println("Opcion 0: Salir y Exportar");
             opc = Integer.parseInt(leer.readLine());
             
             switch(opc) {
-                case 1: lec.AgregarConductor(); break;
-                case 2: lec.AgregarBus("main");break;
-                case 3: lec.MostrarBuses(); break;
-                case 4: lec.MostrarConductores(); break;
-                case 5: lec.BuscarConductoresRut(); break;
-                case 6: lec.MostrarBusesyConductores(); break;
-                case 0: lec.exportar(); break;
-                default: System.out.println("Invalido"); break;
+                case 1: 
+                {
+                    lec.AgregarConductor();
+                    break;
+                } 
+                case 2: 
+                {
+                    lec.AgregarBus("");
+                    break;
+                } 
+                case 3: 
+                {
+                    lec.BuscarConductoresRut();
+                    break;
+                } 
+                case 4: 
+                {
+                    new VentanaMain(lec);
+                    break;
+                } 
+                case 5: 
+                {
+                    lec.eliminarBus();
+                    break;
+                } 
+                case 6: {
+                    lec.eliminarConductor();
+                    break;
+                } 
+                case 7: {
+                    lec.editarConductor();
+                    break;
+                } 
+                case 8: 
+                {
+                    lec.editarBus();
+                    break;
+                } 
+                case 9:
+                {
+                    lec.exportarExcel();
+                    break;
+                    
+                }
+                case 0: 
+                {
+                    lec.exportar();
+                    break;
+                } 
+                default: 
+                {
+                    System.out.println("Invalido");
+                    break;
+                } 
             }
         }while(opc != 0);
         
