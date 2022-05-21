@@ -1,26 +1,30 @@
-package Proyecto;
+package proyecto;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.*;
 import java.util.*;
 
-public class Gestion {
-
+public class Gestion implements Reporte{
     //Llenado de colecciones
     //(clase bus y conductor), y luego anidar colecciones
     private BufferedReader lector;
     private String linea;
     private String partes [];
-    private Lectura leer;
     private Bus buses;
     private Conductor choferes;
-    private Map<String,Conductor> mapConductores;
-    private Map<Integer,Bus> mapBuses;
-    private Gestion a;
+    private final Map<String,Conductor> mapConductores;
+    private final Map<String,Conductor> mapConductorFantasma;
+    private final Map<Integer,Bus> mapBuses;
 
     public Gestion() {
         mapConductores = new HashMap();
         mapBuses = new HashMap();
+        mapConductorFantasma = new HashMap();
     }
 
     public BufferedReader getLector() {
@@ -47,14 +51,6 @@ public class Gestion {
         this.partes = partes;
     }
 
-    public Lectura getLeer() {
-        return leer;
-    }
-
-    public void setLeer(Lectura leer) {
-        this.leer = leer;
-    }
-
     public Bus getBuses() {
         return buses;
     }
@@ -71,12 +67,9 @@ public class Gestion {
         this.choferes = choferes;
     }
     
-    
-    
     public void llenadoBus() throws FileNotFoundException, IOException{
         
         lector = new BufferedReader(new FileReader(("./Archivos/Buses.csv")));
-            //Bus buses;
             while((linea = lector.readLine()) != null){
              
              partes = linea.split(",");
@@ -86,17 +79,13 @@ public class Gestion {
                 
             }
           
-            
-            //MostrarBuses();
             lector.close();
             
             linea = null;
-            System.out.println("Buses size: "+mapBuses.size());
     }
     
     public void llenadoConductores() throws FileNotFoundException, IOException{
         lector = new BufferedReader(new FileReader(("./Archivos/Conductores.csv")));
-            //Bus buses;
             int contLinea = 1;
             while((linea = lector.readLine()) != null){
                 
@@ -104,24 +93,21 @@ public class Gestion {
              choferes = new Conductor(partes[0],partes[1],partes[3]);
              //Guardamos datos en un mapa
              mapConductores.put(choferes.getRut() ,choferes);
-             ColeccionAnidada(choferes.getRut(),contLinea);
+             ColeccionAnidada(choferes.getRut() ,contLinea);
             
              contLinea = contLinea + 1;
             }
            
-            
-            //Mostrar();
             lector.close();
             linea = null;
+            
     }
     
     public void ColeccionAnidada(String k, int linea){
        
-        Conductor conductores;
-        
+        Conductor conductores;        
         conductores = mapConductores.get(k);
        
-        
         Bus agregar;
         for(int i = 1; i <= mapBuses.size();i++){
             if(i == linea){
@@ -131,9 +117,8 @@ public class Gestion {
                 conductores.agregarBus(agregar);
             }
         }
+       
         
-        //conductores.MostrarBuses();
-        //Como agrego?
     }
     
     public void AgregarConductor() throws IOException{
@@ -157,8 +142,8 @@ public class Gestion {
         edad = opc.readLine();
         
         choferes = new Conductor(nombre,rut,edad);
-        mapConductores.put(choferes.getRut() ,choferes);
         
+        mapConductores.put(choferes.getRut() ,choferes);
         
         System.out.println("El conductor tiene bus?");
         System.out.println("Opcion 1 : SI");
@@ -167,18 +152,12 @@ public class Gestion {
         busPregunta = Integer.parseInt(opc.readLine());
         //Leer y hacer condicional
         
-        
-        
         if(busPregunta == 1){
             String aviso = "Conductor";
             AgregarBus(aviso);
         }else{
             System.out.println("Luego se le asignara uno");
-        }
-        
-        
-        
-        
+        } 
     }
     
     public void AgregarBus(String aviso) throws IOException{
@@ -195,7 +174,6 @@ public class Gestion {
         //Reestriccion ver si no hay un bus con el mismo numero
         nBus = Integer.parseInt(opc.readLine());
         
-        
         Bus comp = mapBuses.get(nBus);
         
         if(comp == null){
@@ -203,7 +181,6 @@ public class Gestion {
         }else{
             flag = 0;
         }
-        
         
         }while(flag == 0);
         
@@ -226,40 +203,31 @@ public class Gestion {
             choferes.agregarBus(buses);
         }else{
             System.out.println("No hay persona para añadir");
-        }
-        
-        
+        }  
     }
     
     public String MostrarBuses() throws IOException{
-        //System.out.println("Este es el valor del mapa size : "+mapBuses.size());
         String cadena="";
-        for(int i = 1; i <= mapBuses.size(); i++){
-            System.out.println("Numero Bus: "+mapBuses.get(i).getNumeroBus());
-            System.out.println("Matricula: "+mapBuses.get(i).getMatricula());
-            System.out.println("Ciudad Salida: "+mapBuses.get(i).getCiudadInicio());
-            System.out.println("Ciudad Destino: "+mapBuses.get(i).getCiudadFinal());
-            System.out.println("");
-            cadena+= "Numero Bus: "+mapBuses.get(i).getNumeroBus()+"\n";
-            cadena+= "Matricula: "+mapBuses.get(i).getMatricula()+"\n";
-            cadena+= "Ciudad Salida: "+mapBuses.get(i).getCiudadInicio()+"\n";
-            cadena+= "Ciudad Destino:  "+mapBuses.get(i).getCiudadFinal()+"\n";
+        for(String rut : mapConductores.keySet()){
+            cadena += "----------------------------------------------- \n";
+            cadena += mapConductores.get(rut).MostrarBuses();
         }
-        //System.out.println("Este es el valor del mapa size : "+mapBuses.size());
+
         return cadena;
     }
     
-    public void MostrarConductores() throws IOException{
-        System.out.println("           Conductores         ");
-        System.out.println("");
-        System.out.println("Rut           Nombre            Edad");
+    public String MostrarConductores() throws IOException{
         
-        for(String key: mapConductores.keySet()){  
-          System.out.println(key+ " - " + mapConductores.get(key).getNombre() +"  - " +mapConductores.get(key).getEdad());
-        } 
+        String cadena="";
+        for(String rut : mapConductores.keySet()){
+            cadena += "--------------------------------------- \n";
+            cadena += "Nombre: " + mapConductores.get(rut).getNombre() + "\n";
+            cadena += "Edad: " + mapConductores.get(rut).getEdad() + "\n";
+            cadena += "RUT: " + mapConductores.get(rut).getRut() + "\n";
+            
+        }
 
-        //Mostrar bus asociado al conductor, en el caso de no tener bus asociado
-        //Buscar si se encuentra un bus disponible para asignarle 
+        return cadena;
     }
     
     public String retornarBuses() throws IOException{
@@ -270,18 +238,19 @@ public class Gestion {
             cadena+= "Ciudad Salida: "+mapBuses.get(i).getCiudadInicio()+"\n";
             cadena+= "Ciudad Destino:  "+mapBuses.get(i).getCiudadFinal()+"\n"; 
         }
-        System.out.println("Este es el valor del mapa size : "+mapBuses.size());
+        
+        
         return cadena;
     }
     
     public String retornarConductores() throws IOException{
         String cadena="";        
         for(String key: mapConductores.keySet()){  
-            cadena+= "RUT Conductor: "+mapConductores.get(key).getRut()+"\n";
-            cadena+= "Nombre: "+mapConductores.get(key).getNombre()+"\n";
-            cadena+= "Edad: "+mapConductores.get(key).getEdad()+"\n";
+            cadena+= "RUT Conductor: "+ mapConductores.get(key).getRut()+"\n";
+            cadena+= "Nombre: "+ mapConductores.get(key).getNombre()+"\n";
+            cadena+= "Edad: "+ mapConductores.get(key).getEdad()+"\n";
         } 
-       // System.out.println("Este es el valor del mapa size : "+mapBuses.size());
+        
         return cadena;
     }
     
@@ -297,8 +266,6 @@ public class Gestion {
         if(mapConductores.get(rut) == null){
             System.out.println("No existe el conductor");
         }else{
-        
-        //Conductor oo = mapConductores.get(rut);
             aa = mapConductores.get(rut).getNombre();
             bb = mapConductores.get(rut).getEdad();
             cc = mapConductores.get(rut).getRut();
@@ -310,42 +277,20 @@ public class Gestion {
             Conductor oo = mapConductores.get(rut);
             oo.MostrarBuses();
         }
-        
-        
-        
-        //Mostrar bus asociado al conductor, en el caso de no tener bus asociado
-        //Buscar si se encuentra un bus disponible para asignarle
     }
     
-    public void MostrarBusesyConductores(){
-        
+    public String MostrarBusesyConductores(){
+        String cadena = "";
         for(String key: mapConductores.keySet()){  
-          System.out.println("");
-          System.out.println("Rut           Nombre            Edad");
-          System.out.println(key+ " - " + mapConductores.get(key).getNombre() +"  - " +mapConductores.get(key).getEdad());
           Conductor oo = mapConductores.get(key);
-          oo.MostrarBuses();
+          
+            cadena += "Nombre: " + mapConductores.get(key).getNombre() + "\n";
+            cadena += "Edad: " + mapConductores.get(key).getEdad() + "\n";
+            cadena += "RUT: " + mapConductores.get(key).getRut() + "\n";
+          
+          cadena += oo.MostrarBuses() + "\n";
         } 
-    
-    }
-
-    public void exportar() throws IOException{
-        //System.out.println("Este es el valor del mapa size : "+mapBuses.size());
-        //Gestion a = new Gestion();
-        try{
-            File archivo = new File("reporte.txt");
-           // if(archivo.exists() == false){
-            FileWriter aux = new FileWriter(archivo);
-            BufferedWriter output = new BufferedWriter(aux);
-            output.write(retornarBuses());
-            output.write("---------------------------------------------------\n");
-            output.write(retornarConductores());
-            System.out.println("Archivo creado");
-            output.close();
-        //}
-        }catch(Exception e){
-            e.getStackTrace();   
-        }
+        return cadena;
     }
     
     public void eliminarConductor() throws IOException{
@@ -359,38 +304,296 @@ public class Gestion {
         if(mapConductores.containsKey(key)) {
             mapConductores.remove(key);
             System.out.println("El conductor ha sido eliminado correctamente");
-
         } else{
             System.out.println("El conductor no existe");
         }
     }
 
     public void eliminarBus() throws IOException{
-        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
-        // Obtener key
-        String key;
-        System.out.println("Ingrese el rut del conductor");
-        key = opc.readLine();
-        // Obtener número del bus
-        int num;
-        System.out.println("Ingrese el bus que desea eliminar del conductor");
-        num = Integer.parseInt(opc.readLine());
-        // Eliminación del bus
-        if(mapConductores.containsKey(key)){
-            if(mapConductores.get(key).eliminarBuses(num)){
-                System.out.println("El bus del conductor ha sido eliminado correctamente");
-            } else {
-                System.out.println("El bus del conductor no existe");
+        BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
+        int opc;
+        System.out.println("Eliminar por: \nOpcion 1: numero bus\nOpcion 2: matricula");
+        opc = Integer.parseInt(leer.readLine()); 
+
+        if(opc == 1) {
+            int nBus;
+            System.out.println("Ingrese el numero del bus que desea eliminar");
+            nBus = Integer.parseInt(leer.readLine()); 
+
+            for(String key: mapConductores.keySet()){
+                mapConductores.get(key).eliminarBuses(nBus); 
             }
-        } else{
-            System.out.println("El conductor no existe");
+
+        } else if(opc == 2) {
+            String matricula;
+            System.out.println("Ingrese el numero de la matrícula del bus que desea eliminar");
+            matricula = leer.readLine();
+
+            for(String key: mapConductores.keySet()){
+                mapConductores.get(key).eliminarBuses(matricula); 
+            }
         }
     }
-
-}
     
-    /*public void salir() throws IOException{
-            Gestion a = new Gestion();
-            String mostrar = a.retornarDatosBuses();
-            System.out.println("Algo: "+mostrar);
-    }*/
+    public void editarConductor() throws IOException{
+        BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
+        String rut, nombreNuevo, edadNueva;
+        int nBus;
+
+        System.out.println("Ingrese rut del conductor que desea modificar");
+        int opc;
+        rut = leer.readLine();   // Reestriccion si no existe el rut
+        if(mapConductores.containsKey(rut)){
+            System.out.println("Ingrese la opcion que desea cambiar:");
+            System.out.println("Opcion 1: Nombre");
+            System.out.println("Opcion 2: Edad");
+            System.out.println("Opcion 3: Bus Conductor");
+            opc = Integer.parseInt(leer.readLine());
+
+            switch(opc) {
+                case 1:
+                {
+                    System.out.println("Ingrese nombre nuevo");
+                    nombreNuevo = leer.readLine();
+                    mapConductores.get(rut).setNombre(nombreNuevo); //Metodo verificador
+                    break;
+                }
+                case 2:
+                {
+                    System.out.println("Ingrese edad nueva");
+                    edadNueva = leer.readLine();
+                    mapConductores.get(rut).setEdad(edadNueva); //Metodo verificador
+                    break;
+                }
+                case 3:
+                {
+                    System.out.println("Ingrese el numero del bus que desea modificar");
+                    nBus = Integer.parseInt(leer.readLine());
+                    mapConductores.get(rut).editarBuses(nBus);
+                    break;
+                }
+                default: 
+                {
+                    System.out.println("Invalido");
+                    break;
+                } 
+            }
+
+        }else{
+            System.out.println("Rut mal ingresado intente de nuevo");
+            editarConductor();
+        }
+    }
+    
+    public void editarBus() throws IOException{
+        BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
+        int nBus;
+
+        System.out.println("Ingrese el numero del bus que desea modificar");
+        nBus = Integer.parseInt(leer.readLine()); 
+
+        for(String key: mapConductores.keySet()){
+            mapConductores.get(key).editarBuses(nBus); 
+        }
+    }
+    
+    public int contar() throws IOException{
+        int cont=0;
+        
+        for(String key: mapConductores.keySet()){
+            cont += mapConductores.get(key).getBuses().size();
+        }
+        
+        return cont;
+    }
+    
+    public void actualizarMapaBuses() throws IOException{
+        mapBuses.clear();
+        for(String key: mapConductores.keySet()){
+            for(int i = 0 ; i < mapConductores.get(key).getBuses().size() ; i++){
+            mapBuses.put(mapConductores.get(key).getBuses().get(i).getNumeroBus(), mapConductores.get(key).getBuses().get(i));
+            }
+        }
+    }
+    
+    //Interface Reporte
+    @Override
+    
+    public void exportar() throws IOException{
+        try{
+            File archivo = new File("reporte.txt");
+            FileWriter aux = new FileWriter(archivo);
+            try (BufferedWriter output = new BufferedWriter(aux)) {
+                output.write(MostrarBuses());
+                output.write("---------------------------------------------------\n");
+                output.write(MostrarConductores());
+            }
+        }catch(IOException e){
+            e.getStackTrace();   
+        }
+    }
+    
+    @Override
+    public void exportarExcel() throws IOException {
+        actualizarMapaBuses();
+        File archivo = new File("Excel.xls");
+        Workbook libro = new HSSFWorkbook();
+        
+        Sheet pagina = libro.createSheet("Pagina Buses");
+        int contador = contar();
+        System.out.println("Ese es el contador: "+contador);
+        int numFila=contador ,numColumna=4;
+        try{
+            for(int i = -1 ; i < numFila ; i++){
+                Row fila = pagina.createRow(i+1);
+                for(int j=0 ; j < numColumna ; j++){
+                    Cell celda = fila.createCell(j);
+                    if(i == -1){
+                        celda.setCellValue(llenadoExcel(j));
+                    }else{
+                        if(j==0){
+                            celda.setCellValue(llenadoExcelI(j,i));
+                        }else{
+                            celda.setCellValue(llenadoExcel(j,i));
+                        }
+                    }
+                    libro.write(new FileOutputStream(archivo));
+                }
+            }
+            System.out.println("Exportación exitosa");
+        }catch(IOException e){
+        }
+    }
+    
+    @Override
+    public String llenadoExcel(int i){
+        switch(i){
+            case 0:
+            {
+                return "Numero Bus";
+            }
+            
+            case 1:
+            {
+                return "Matricula";
+            }
+            
+            case 2:
+            {
+               return "Comienzo";
+            }
+            
+            case 3:
+            {
+                return "Final";
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public int llenadoExcelI(int i, int j){
+        if (i == 0){
+            return mapBuses.get(j+1).getNumeroBus();
+        }
+        return 0;
+    }
+    
+    @Override
+    public String llenadoExcel(int i, int j){
+        switch(i){
+            case 1:
+            {
+                return  mapBuses.get(j+1).getMatricula();
+            }
+            
+            case 2:
+            {
+                return  mapBuses.get(j+1).getCiudadInicio();
+            }
+            
+            case 3:
+            {
+                    return  mapBuses.get(j+1).getCiudadFinal();
+            }
+            
+            case 4:
+            {
+                return  mapBuses.get(j+1).getCiudadInicio();
+            }
+        }
+        return null;
+    }
+    //Fin Interface Reporte
+    //Entrega P4
+    
+    public void conductorMenor(){
+        //System.out.println("Entro");
+        int edadMenor = 200;
+        int edad;
+        String clave = null;
+        for(String key: mapConductores.keySet()){
+            edad = Integer.parseInt(mapConductores.get(key).getEdad());
+            if(edadMenor > edad){
+                edadMenor = edad;
+                clave = key;
+            }
+        }
+       System.out.println("--------------------------------------- \n");
+       System.out.println("Nombre: " +mapConductores.get(clave).getNombre());
+       System.out.println("Rut: " +mapConductores.get(clave).getRut());
+       System.out.println("Edad: " +mapConductores.get(clave).getEdad());
+       System.out.println("--------------------------------------- \n");
+    }
+    
+    public void BusesPorViaje() throws IOException {
+        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
+        
+        System.out.println("Ingrese la ciudad de salida");
+        System.out.println("Opciones: ");
+        System.out.println("***************************");
+        MostrarCiudades();
+        System.out.println("***************************");
+        String partida = opc.readLine();
+        System.out.println("***************************");
+        System.out.println("Ciudad De Partida: "+partida);
+        for(String key: mapConductores.keySet()){
+            mapConductores.get(key).BusesPorViaje(partida,0);
+        }
+    }
+    
+    public void BusesPorViajeDestino() throws IOException {
+        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
+        
+        System.out.println("Ingrese la ciudad de Destino");
+        System.out.println("Opciones: ");
+        System.out.println("***************************");
+        MostrarCiudades();
+        System.out.println("***************************");
+        String ciudad = opc.readLine();
+        System.out.println("***************************");
+        System.out.println("Ciudad De Llegada: " +ciudad);
+        for(String key: mapConductores.keySet()){
+            mapConductores.get(key).BusesPorViaje(ciudad,1);
+        }
+    }
+    
+    public void MostrarCiudades(){
+        System.out.println("Valparaiso");
+        System.out.println("Santiago");
+        System.out.println("Concepcion");
+        System.out.println("Copiapo");
+        System.out.println("Iquique");
+        System.out.println("Temuco");
+        System.out.println("Concepcion");
+        System.out.println("Rancagua");
+        System.out.println("PuertoMontt");
+        System.out.println("Chillan");
+        System.out.println("ViñaDelMar");
+        System.out.println("Atacama");
+        System.out.println("Talca");
+        System.out.println("Talcahuano");
+    }
+    
+    
+}

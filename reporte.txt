@@ -1,0 +1,109 @@
+----------------------------------------------- 
+Número Bus: 1
+Matrícula: 6210TML
+Ciudad Inicial: Valparaiso
+Ciudad Final: Santiago
+----------------------------------------------- 
+Número Bus: 10
+Matrícula: 9734TBP
+Ciudad Inicial: ViñaDelMar
+Ciudad Final: Atacama
+----------------------------------------------- 
+Número Bus: 11
+Matrícula: 7361ICJ
+Ciudad Inicial: PuertoMontt
+Ciudad Final: Santiago
+----------------------------------------------- 
+Número Bus: 5
+Matrícula: 2831RHO
+Ciudad Inicial: Santiago
+Ciudad Final: Temuco
+----------------------------------------------- 
+Número Bus: 3
+Matrícula: 2338RFU
+Ciudad Inicial: Copiapo
+Ciudad Final: Santiago
+----------------------------------------------- 
+Número Bus: 12
+Matrícula: 8714RDM
+Ciudad Inicial: Talca
+Ciudad Final: Talcahuano
+----------------------------------------------- 
+Número Bus: 2
+Matrícula: 0162PQV
+Ciudad Inicial: Valparaiso
+Ciudad Final: Concepción
+----------------------------------------------- 
+Número Bus: 7
+Matrícula: 5159ZDX
+Ciudad Inicial: Concepción
+Ciudad Final: PuertoMontt
+----------------------------------------------- 
+Número Bus: 8
+Matrícula: 1940WCL
+Ciudad Inicial: Arica
+Ciudad Final: Iquique
+----------------------------------------------- 
+Número Bus: 6
+Matrícula: 6537NLR
+Ciudad Inicial: Temuco
+Ciudad Final: Rancagua
+----------------------------------------------- 
+Número Bus: 4
+Matrícula: 1393GZX
+Ciudad Inicial: Santiago
+Ciudad Final: Iquique
+----------------------------------------------- 
+Número Bus: 9
+Matrícula: 7346RTB
+Ciudad Inicial: Coquimbo
+Ciudad Final: Chillan
+---------------------------------------------------
+--------------------------------------- 
+Nombre: 10.234.674-1
+Edad: 45
+RUT: Sebastian Hernandez
+--------------------------------------- 
+Nombre: 8.532.462-4
+Edad: 50
+RUT: Antonio Oyarzun
+--------------------------------------- 
+Nombre: 18.164.708-6
+Edad: 23
+RUT: Javiera Peralta
+--------------------------------------- 
+Nombre: 19.762.283-0
+Edad: 22
+RUT: Rodrigo Fuentes
+--------------------------------------- 
+Nombre: 13.897.920-2
+Edad: 44
+RUT: Marcelo Aros
+--------------------------------------- 
+Nombre: 16.914.010-3
+Edad: 26
+RUT: Camilo Torres
+--------------------------------------- 
+Nombre: 14.523.565-4
+Edad: 33
+RUT: Alonso Henriquez
+--------------------------------------- 
+Nombre: 13.848.457-2
+Edad: 35
+RUT: Penelope Lopez
+--------------------------------------- 
+Nombre: 10.634.519-8
+Edad: 40
+RUT: Alexis Navarrete
+--------------------------------------- 
+Nombre: 16.617.679-4
+Edad: 32
+RUT: Felipe Alvarez
+--------------------------------------- 
+Nombre: 18.219.056-K
+Edad: 27
+RUT: Federico Vergara
+--------------------------------------- 
+Nombre: 9.986.694-2
+Edad: 42
+RUT: Enzo Martinez
