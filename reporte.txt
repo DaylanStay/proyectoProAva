@@ -1,0 +1,92 @@
+Numero Bus: 1
+Matricula: 6210TML
+Ciudad Salida: Valparaiso
+Ciudad Destino:  Santiago
+Numero Bus: 2
+Matricula: 0162PQV
+Ciudad Salida: Valparaiso
+Ciudad Destino:  Concepción
+Numero Bus: 3
+Matricula: 2338RFU
+Ciudad Salida: Copiapo
+Ciudad Destino:  Santiago
+Numero Bus: 4
+Matricula: 1393GZX
+Ciudad Salida: Santiago
+Ciudad Destino:  Iquique
+Numero Bus: 5
+Matricula: 2831RHO
+Ciudad Salida: Santiago
+Ciudad Destino:  Temuco
+Numero Bus: 6
+Matricula: 6537NLR
+Ciudad Salida: Temuco
+Ciudad Destino:  Rancagua
+Numero Bus: 7
+Matricula: 5159ZDX
+Ciudad Salida: Concepción
+Ciudad Destino:  PuertoMontt
+Numero Bus: 8
+Matricula: 1940WCL
+Ciudad Salida: Arica
+Ciudad Destino:  Iquique
+Numero Bus: 9
+Matricula: 7346RTB
+Ciudad Salida: Coquimbo
+Ciudad Destino:  Chillan
+Numero Bus: 10
+Matricula: 9734TBP
+Ciudad Salida: ViñaDelMar
+Ciudad Destino:  Atacama
+Numero Bus: 11
+Matricula: 7361ICJ
+Ciudad Salida: PuertoMontt
+Ciudad Destino:  Santiago
+Numero Bus: 12
+Matricula: 8714RDM
+Ciudad Salida: Talca
+Ciudad Destino:  Talcahuano
+Numero Bus: 13
+Matricula: 378JHU4
+Ciudad Salida: Talca
+Ciudad Destino:  Talcahuano
+---------------------------------------------------
+RUT Conductor: 17.213.546.-5
+Nombre: Jorge Peralta
+Edad: 23
+RUT Conductor: 10.234.674-1
+Nombre: Sebastian Hernandez
+Edad: 45
+RUT Conductor: 14.523.565-4
+Nombre: Alonso Henriquez
+Edad: 33
+RUT Conductor: 13.897.920-2
+Nombre: Marcelo Aros
+Edad: 44
+RUT Conductor: 18.219.056-K
+Nombre: Federico Vergara
+Edad: 27
+RUT Conductor: 19.762.283-0
+Nombre: Rodrigo Fuentes
+Edad: 22
+RUT Conductor: 16.617.679-4
+Nombre: Felipe Alvarez
+Edad: 32
+RUT Conductor: 13.848.457-2
+Nombre: Penelope Lopez
+Edad: 35
+RUT Conductor: 10.634.519-8
+Nombre: Alexis Navarrete
+Edad: 40
+RUT Conductor: 9.986.694-2
+Nombre: Enzo Martinez
+Edad: 42
+RUT Conductor: 8.532.462-4
+Nombre: Antonio Oyarzun
+Edad: 50
+RUT Conductor: 18.164.708-6
+Nombre: Javiera Peralta
+Edad: 23
+RUT Conductor: 16.914.010-3
+Nombre: Camilo Torres
+Edad: 26
