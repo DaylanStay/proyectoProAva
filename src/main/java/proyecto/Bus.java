@@ -181,15 +181,17 @@ public class Bus implements Datos{
         }
         return cadena;
     }
-    
+
     /**
      * Metodo que muestra a los conductores por pantalla.
      * @param rut rut del conductor.
      */
-    public void mostrarConductorPorRut(String rut){
+    public void mostrarConductorPorRut(String rut, int nBus){
         if(mapConductores.get(rut) == null){
-            System.out.println("No existe el conductor");
+            System.out.println("El conductor no conduce el bus: " + nBus);
         }else{
+            System.out.println("-----------------------------------------");
+            System.out.println("El conductor conduce el bus: " + nBus);
             mapConductores.get(rut).mostrarPersonaPorRut();
         }
     }
@@ -219,7 +221,6 @@ public class Bus implements Datos{
             System.out.println("Ingrese la opcion que desea cambiar:");
             System.out.println("Opcion 1: Nombre");
             System.out.println("Opcion 2: Edad");
-            System.out.println("Opcion 3: Bus Conductor");
             int opc = Integer.parseInt(leer.readLine());
 
             switch(opc) {
@@ -237,13 +238,6 @@ public class Bus implements Datos{
                     mapConductores.get(rut).setEdad(edadNueva); //Metodo verificador
                     break;
                 }
-                case 3:
-                {
-                    System.out.println("Ingrese el numero del bus que desea modificar");
-                    nBus = Integer.parseInt(leer.readLine());
-                    mapConductores.get(rut).editarBuses(nBus);
-                    break;
-                }
                 default: 
                 {
                     System.out.println("Invalido");
@@ -252,6 +246,46 @@ public class Bus implements Datos{
             }
 
         }
+    }
+    
+         /**
+     * Metodo que te retorna al conductor menor del mapa conductores.
+     * @param edadMenorGestion
+     * @param rut
+     * @return cadena de String con la clave y la edad del conductor menor
+     */
+    
+    public String[] conductorMenor(int edadMenorGestion,String rut){
+        int edad;
+        String clave = null;
+        String edadCadena = String.valueOf(edadMenorGestion);
+        for(String key: mapConductores.keySet()){
+           
+            edad = Integer.parseInt(mapConductores.get(key).getEdad());
+            
+            if(edadMenorGestion > edad){
+                edadMenorGestion = edad;
+                edadCadena = String.valueOf(edadMenorGestion);
+                clave = key;
+            }else{
+                edadCadena = String.valueOf(edadMenorGestion);
+            }   
+        }   
+        return new String[]{clave, edadCadena};
+    }
+    
+     /**
+     * Sobrecarga de metodo que entrega una cadena con el conductor menor
+     * @param clave
+     * @return cadena que almacena al conductor menor
+     */
+    
+    public String conductorMenor(String clave){
+        String cadena = "";
+        cadena += "Nombre: " + mapConductores.get(clave).getNombre() + "\n";
+        cadena += "RUT: " + mapConductores.get(clave).getRut() + "\n";
+        cadena += "Edad: " + mapConductores.get(clave).getEdad() + "\n";
+        return cadena;
     }
 
     //************************************************************************
@@ -280,5 +314,4 @@ public class Bus implements Datos{
         cadena+= "Ciudad Destino:  "+ciudadFinal+"\n\n"; 
         return cadena;
     }
-    
 }

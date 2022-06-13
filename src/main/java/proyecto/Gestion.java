@@ -43,8 +43,7 @@ public class Gestion implements Reporte{
         BufferedReader lector = new BufferedReader(new FileReader(("./Archivos/Buses.csv")));
         String linea;
         String datos[];
-        
-            while((linea = lector.readLine()) != null){
+        while((linea = lector.readLine()) != null){
              datos = linea.split(",");
              int nBus = Integer.parseInt(datos[0]);
              Bus buses = new Bus(nBus,datos[1],datos[2],datos[3]);
@@ -52,8 +51,8 @@ public class Gestion implements Reporte{
              listaBuses.add(buses);
              asignarConductores(nBus);
              asignarPasajeros(nBus);
-            }
-            lector.close();
+        }
+        lector.close();
     }
     
     /**
@@ -65,7 +64,6 @@ public class Gestion implements Reporte{
         BufferedReader lector = new BufferedReader(new FileReader(("./Archivos/Pasajeros.csv")));
         String linea;
         String datos[];
-        
         while((linea = lector.readLine()) != null){    
              datos = linea.split(",");
              int nBus = Integer.parseInt(datos[0]);
@@ -83,8 +81,7 @@ public class Gestion implements Reporte{
     public void llenadoConductores() throws FileNotFoundException, IOException{
         BufferedReader lector = new BufferedReader(new FileReader(("./Archivos/Conductores.csv")));
         String linea;
-        String datos[];
-            
+        String datos[];     
         while((linea = lector.readLine()) != null){     
              datos = linea.split(",");
              int numero = Integer.parseInt(datos[2]);
@@ -102,14 +99,13 @@ public class Gestion implements Reporte{
      */
     public void asignarConductores(int numeroBus){
         for(int i = 0 ; i < listaConductores.size() ; i++){
-            if((listaConductores.get(i).getNumero()) != mapBuses.get(numeroBus).getNumeroBus()){
+            if((listaConductores.get(i).getNumero()) == mapBuses.get(numeroBus).getNumeroBus()){
                 for(int j = 0 ; j < listaBuses.size() ; j++){
                     if(listaBuses.get(j).getNumeroBus() == numeroBus){
                         listaBuses.get(j).agregarConductor(listaConductores.get(i));
                     }
-}
-            }
-            
+                }
+            } 
         }
     }
     
@@ -125,7 +121,7 @@ public class Gestion implements Reporte{
                     if(listaBuses.get(j).getNumeroBus() == numeroBus){
                         listaBuses.get(j).agregarPasajero(mapPasajeros.get(rut));
                     }
-}
+                }  
             }
             i++;
         }
@@ -179,8 +175,7 @@ public class Gestion implements Reporte{
      * @return booleano que dice si está ocupado o no.
      */
     public boolean verificarBus(int nBus){
-        Bus comp = mapBuses.get(nBus);
-        
+        Bus comp = mapBuses.get(nBus);  
         if(comp == null){
             return true;
         }else{
@@ -198,11 +193,8 @@ public class Gestion implements Reporte{
         for(int i = 0 ; i < listaBuses.size() ; i++){
             if(listaBuses.get(i).getNumeroBus() != 0){
                 cadena += listaBuses.get(i).cadenaDatos();
-                listaBuses.get(i).mostrarDatos();
             }
         }
-        
-        
         return cadena;
     }
     
@@ -254,13 +246,13 @@ public class Gestion implements Reporte{
      * @throws IOException
      */
     public void BuscarConductoresRut() throws IOException{
-        
+
         BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
         String rut;
         System.out.println("Ingrese el rut del conductor que quiere mostrar: ");
         rut = opc.readLine();
         for(int i = 0 ; i < listaBuses.size() ; i++){
-            listaBuses.get(i).mostrarConductorPorRut(rut);
+            listaBuses.get(i).mostrarConductorPorRut(rut, listaBuses.get(i).getNumeroBus());
         }
     }
     
@@ -274,7 +266,6 @@ public class Gestion implements Reporte{
         System.out.println("Ingrese el Rut del conductor");
         String key;
         key = opc.readLine();
-
         // Eliminación
         for(int i = 0 ; i < listaBuses.size() ; i++){
             listaBuses.get(i).eliminarConductores(key);
@@ -295,18 +286,15 @@ public class Gestion implements Reporte{
             int nBus;
             System.out.println("Ingrese el numero del bus que desea eliminar");
             nBus = Integer.parseInt(leer.readLine()); 
-
             for(int i = 0 ; i < listaBuses.size() ; i++){
                 if(listaBuses.get(i).getNumeroBus() == nBus){
                     listaBuses.remove(i);
                 } 
             }
-            
         } else if(opc == 2) {
             String matricula;
             System.out.println("Ingrese el numero de la matrícula del bus que desea eliminar");
             matricula = leer.readLine();
-
             for(int i = 0 ; i < listaBuses.size() ; i++){
                 if(listaBuses.get(i).getMatricula().equals(matricula)){
                     listaBuses.remove(i);
@@ -341,7 +329,6 @@ public class Gestion implements Reporte{
             if(listaBuses.get(i).getNumeroBus() == nBus) {
                 String aux;
                 int opc;
-
                 System.out.println("Ingrese la opcion que desea cambiar:");
                 System.out.println("Opcion 1: Ciudad inicial");
                 System.out.println("Opcion 2: Ciudad final");
@@ -396,6 +383,8 @@ public class Gestion implements Reporte{
                 output.write(mostrarBuses());
                 output.write("---------------------------------------------------\n");
                 output.write(mostrarConductores());
+                output.write("---------------------------------------------------\n");
+                output.write(mostrarPasajeros());
             }
         }catch(IOException e){
             e.getStackTrace();   
@@ -423,7 +412,6 @@ public class Gestion implements Reporte{
         Workbook libro = new HSSFWorkbook();  
         Sheet pagina = libro.createSheet("Pagina Buses");
         int contador = listaBuses.size();
-        System.out.println("Ese es el contador: "+contador);
         int numFila=contador ,numColumna=4;
         try{
             for(int i = -1 ; i < numFila ; i++){
@@ -525,24 +513,22 @@ public class Gestion implements Reporte{
     
     /**
      * Metodo que busca y muestra al conductor con menor edad de la coleccion.
+     * @return un String cadena que almacena la informacion del conductor menor
      */
      public String conductorMenor(){
         String cadena = "";
         int edadMenor = 200;
-        int edad;
         String clave = null;
-        for(String key: mapConductores.keySet()){
-            edad = Integer.parseInt(mapConductores.get(key).getEdad());
-            if(edadMenor > edad){
-                edadMenor = edad;
-                clave = key;
+        String[] array = new String[1];
+        
+        for(int i = 0 ; i < listaBuses.size() ; i++){
+            array = listaBuses.get(i).conductorMenor(edadMenor,clave);
+            clave = array[0];
+            edadMenor = Integer.parseInt(array[1]);   
+            if(clave != null){
+            cadena = listaBuses.get(i).conductorMenor(clave);
             }
         }
-        
-        cadena += "Nombre: " + mapConductores.get(clave).getNombre() + "\n";
-        cadena += "RUT: " + mapConductores.get(clave).getRut() + "\n";
-        cadena += "Edad: " + mapConductores.get(clave).getEdad() + "\n";
-       
         return cadena;
     }
     
@@ -561,8 +547,15 @@ public class Gestion implements Reporte{
         String partida = opc.readLine();
         System.out.println("***************************");
         System.out.println("Ciudad De Partida: "+partida);
-        for(String key: mapConductores.keySet()){
-            mapConductores.get(key).BusesPorViaje(partida,0);
+          for(int i = 0 ; i < listaBuses.size() ; i++){
+            
+            if(listaBuses.get(i).getCiudadInicio().equals(partida)){
+                System.out.println("---------------------------------------");
+                System.out.println("Bus Número: "+listaBuses.get(i).getNumeroBus());
+                System.out.println("Matrícula: "+listaBuses.get(i).getMatricula());
+                System.out.println("Llegada: " +listaBuses.get(i).getCiudadFinal());
+            } 
+            
         }
     }
     
@@ -581,9 +574,17 @@ public class Gestion implements Reporte{
         String ciudad = opc.readLine();
         System.out.println("***************************");
         System.out.println("Ciudad De Llegada: " +ciudad);
-        for(String key: mapConductores.keySet()){
-            mapConductores.get(key).BusesPorViaje(ciudad,1);
+        for(int i = 0 ; i < listaBuses.size() ; i++){
+            
+            if(listaBuses.get(i).getCiudadFinal().equals(ciudad)){
+                System.out.println("---------------------------------------");
+                System.out.println("Bus Número: "+listaBuses.get(i).getNumeroBus());
+                System.out.println("Matrícula: "+listaBuses.get(i).getMatricula());
+                System.out.println("Partida: "+listaBuses.get(i).getCiudadInicio());
+            } 
+            
         }
+        
     }
     
     /**
@@ -608,6 +609,7 @@ public class Gestion implements Reporte{
    
     /**
      * Metodo que muestra a personas por RUT ( en este caso conductores).
+     * @return un String cadena que almacena la informacion de todas las personas
      */
     public String mostrarPersonas(){
         String cadena = "";

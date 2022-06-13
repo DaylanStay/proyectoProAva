@@ -2,91 +2,198 @@ Numero Bus: 1
 Matricula: 6210TML
 Ciudad Salida: Valparaiso
 Ciudad Destino:  Santiago
+
 Numero Bus: 2
 Matricula: 0162PQV
 Ciudad Salida: Valparaiso
 Ciudad Destino:  Concepción
+
 Numero Bus: 3
 Matricula: 2338RFU
 Ciudad Salida: Copiapo
 Ciudad Destino:  Santiago
+
 Numero Bus: 4
 Matricula: 1393GZX
 Ciudad Salida: Santiago
 Ciudad Destino:  Iquique
+
 Numero Bus: 5
 Matricula: 2831RHO
 Ciudad Salida: Santiago
 Ciudad Destino:  Temuco
+
 Numero Bus: 6
 Matricula: 6537NLR
 Ciudad Salida: Temuco
 Ciudad Destino:  Rancagua
+
 Numero Bus: 7
 Matricula: 5159ZDX
 Ciudad Salida: Concepción
 Ciudad Destino:  PuertoMontt
+
 Numero Bus: 8
 Matricula: 1940WCL
 Ciudad Salida: Arica
 Ciudad Destino:  Iquique
+
 Numero Bus: 9
 Matricula: 7346RTB
 Ciudad Salida: Coquimbo
 Ciudad Destino:  Chillan
+
 Numero Bus: 10
 Matricula: 9734TBP
-Ciudad Salida: ViñaDelMar
+Ciudad Salida: Viña Del Mar
 Ciudad Destino:  Atacama
+
 Numero Bus: 11
 Matricula: 7361ICJ
 Ciudad Salida: PuertoMontt
 Ciudad Destino:  Santiago
+
 Numero Bus: 12
 Matricula: 8714RDM
 Ciudad Salida: Talca
 Ciudad Destino:  Talcahuano
-Numero Bus: 13
-Matricula: 378JHU4
-Ciudad Salida: Talca
-Ciudad Destino:  Talcahuano
+
 ---------------------------------------------------
 RUT Conductor: 17.213.546.-5
 Nombre: Jorge Peralta
 Edad: 23
+
 RUT Conductor: 10.234.674-1
 Nombre: Sebastian Hernandez
 Edad: 45
+
 RUT Conductor: 14.523.565-4
 Nombre: Alonso Henriquez
 Edad: 33
+
 RUT Conductor: 13.897.920-2
 Nombre: Marcelo Aros
 Edad: 44
+
 RUT Conductor: 18.219.056-K
 Nombre: Federico Vergara
 Edad: 27
+
 RUT Conductor: 19.762.283-0
 Nombre: Rodrigo Fuentes
 Edad: 22
+
 RUT Conductor: 16.617.679-4
 Nombre: Felipe Alvarez
 Edad: 32
+
 RUT Conductor: 13.848.457-2
 Nombre: Penelope Lopez
 Edad: 35
+
 RUT Conductor: 10.634.519-8
 Nombre: Alexis Navarrete
 Edad: 40
+
 RUT Conductor: 9.986.694-2
 Nombre: Enzo Martinez
 Edad: 42
+
 RUT Conductor: 8.532.462-4
-Nombre: Antonio Oyarzun
+Nombre: Antonio Ocampos
 Edad: 50
+
 RUT Conductor: 18.164.708-6
 Nombre: Javiera Peralta
 Edad: 23
+
 RUT Conductor: 16.914.010-3
 Nombre: Camilo Torres
 Edad: 26
+
+---------------------------------------------------
+RUT del pasajero: 24.765.924-2
+Nombre del pasajero: Melissa Rojas
+Edad del pasajero: 7
+Bus del pasajero:  1
+
+RUT del pasajero: 5.178.944-K
+Nombre del pasajero: Felipe Chavez
+Edad del pasajero: 72
+Bus del pasajero:  1
+
+RUT del pasajero: 22.861.462-9
+Nombre del pasajero: Roberto QuiÃ±ones
+Edad del pasajero: 13
+Bus del pasajero:  2
+
+RUT del pasajero: 26.568.975-2
+Nombre del pasajero: Valentina Rojas
+Edad del pasajero: 1
+Bus del pasajero:  3
+
+RUT del pasajero: 7.294.420-8
+Nombre del pasajero: Felipe Gonzalez
+Edad del pasajero: 65
+Bus del pasajero:  4
+
+RUT del pasajero: 23.610.145-2
+Nombre del pasajero: Cesar Maureira
+Edad del pasajero: 11
+Bus del pasajero:  5
+
+RUT del pasajero: 9.397.991-5
+Nombre del pasajero: Dylan Estay
+Edad del pasajero: 58
+Bus del pasajero:  6
+
+RUT del pasajero: 25.324.924-2
+Nombre del pasajero: Eduardo Bustamante
+Edad del pasajero: 5
+Bus del pasajero:  6
+
+RUT del pasajero: 13.679.629-1
+Nombre del pasajero: Nicolas Rodriguez
+Edad del pasajero: 44
+Bus del pasajero:  7
+
+RUT del pasajero: 16.251.673-6
+Nombre del pasajero: Rodrigo Rodriguez
+Edad del pasajero: 35
+Bus del pasajero:  7
+
+RUT del pasajero: 17.826.088-K
+Nombre del pasajero: Brian Lopes
+Edad del pasajero: 30
+Bus del pasajero:  8
+
+RUT del pasajero: 24.990.766-9
+Nombre del pasajero: Matias Navarrete
+Edad del pasajero: 6
+Bus del pasajero:  9
+
+RUT del pasajero: 20.321.532-0
+Nombre del pasajero: Stephania Carvajal
+Edad del pasajero: 22
+Bus del pasajero:  9
+
+RUT del pasajero: 23.855.931-6
+Nombre del pasajero: Emilia Duarte
+Edad del pasajero: 10
+Bus del pasajero:  10
+
+RUT del pasajero: 22.694.634-9
+Nombre del pasajero: Constanza Herrera
+Edad del pasajero: 14
+Bus del pasajero:  11
+
+RUT del pasajero: 19.246.998-8
+Nombre del pasajero: Cristobal Gil
+Edad del pasajero: 25
+Bus del pasajero:  12
+
+RUT del pasajero: 13.034.676-6
+Nombre del pasajero: Cristian MuÃ±oz
+Edad del pasajero: 46
+Bus del pasajero:  12
+
