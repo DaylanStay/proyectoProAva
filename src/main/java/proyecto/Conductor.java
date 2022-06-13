@@ -70,9 +70,6 @@ public class Conductor extends Persona implements Datos{
         String cadena = "";
         cadena += "RUT del Conductor: " + getRut() + "\n";
         cadena += "Nombre del Conductor: " + getNombre() + "\n";
-
-        System.out.print(cadena);
-        System.out.println("-----------------------------------------");
         return cadena;
     }
 
