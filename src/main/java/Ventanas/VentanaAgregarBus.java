@@ -19,7 +19,7 @@ public final class VentanaAgregarBus extends JFrame implements ActionListener {
     
     private JTextField numeroBusField;
     private JButton volverBtn, verificarBtn;
-    private JLabel numeroBusLabel;
+    private JLabel numeroBusLabel, avisoLabel;
     
     
     /**
@@ -56,6 +56,11 @@ public final class VentanaAgregarBus extends JFrame implements ActionListener {
             JPanel panel = new JPanel();
             panel.setLayout( new BorderLayout());
             panel.setBounds(15, 15, 350, 200);
+            
+            avisoLabel = new JLabel();
+            avisoLabel.setBounds(10, 10, 350, 25);
+            avisoLabel.setText("En caso de no poner un numero, el programa se caerá.");
+            add(avisoLabel);
             
             verificarBtn = new JButton();
             verificarBtn.setBounds(270,50, 100, 25);

@@ -20,7 +20,7 @@ public final class VentanaMostrarPersonas extends JFrame implements ActionListen
     private JScrollPane barraVertical;
     
     /**
-     * Constructor de la ventana mostrar conductores, usado para construir una
+     * Constructor de la ventana mostrar Personas, usado para construir una
      * de las ventanas que ofrece la ventana principal, con sus respectivos
      * valores iniciales.
      *
@@ -42,7 +42,7 @@ public final class VentanaMostrarPersonas extends JFrame implements ActionListen
     
     /**
      * Metodo que inicializa los distintos componentes que pertenecen a la
-     * ventana Mostrar conductores, ya sean botones, zona de texto y
+     * ventana Mostrar Personas, ya sean botones, zona de texto y
      * demás componentes.
      *
      * @param gestion almacena toda la información y la administra.

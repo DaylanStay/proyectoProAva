@@ -20,7 +20,7 @@ public final class VentanaMostrarConductorMenor extends JFrame implements Action
     private JScrollPane barraVertical;
     
     /**
-     * Constructor de la ventana mostrar conductores, usado para construir una
+     * Constructor de la ventana mostrar conductor menor, usado para construir una
      * de las ventanas que ofrece la ventana principal, con sus respectivos
      * valores iniciales.
      *
@@ -42,7 +42,7 @@ public final class VentanaMostrarConductorMenor extends JFrame implements Action
     
     /**
      * Metodo que inicializa los distintos componentes que pertenecen a la
-     * ventana Mostrar conductores, ya sean botones, zona de texto y
+     * ventana Mostrar conductor menor, ya sean botones, zona de texto y
      * demás componentes.
      *
      * @param gestion almacena toda la información y la administra.

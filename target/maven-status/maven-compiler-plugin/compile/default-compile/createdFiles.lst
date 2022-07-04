@@ -14,5 +14,7 @@ Ventanas\VentanaAgregarBusVerificado.class
 proyecto\Reporte.class
 proyecto\Bus.class
 Ventanas\VentanaMostrarConductores.class
+Ventanas\VentanaEliminarBus.class
+Ventanas\VentanaEliminarConductor.class
 Ventanas\VentanaMostrarBuses.class
 Ventanas\VentanaMostrarPersonas.class

@@ -161,13 +161,12 @@ public class Bus implements Datos{
      * Metodo que elimina conductores del mapa anidado.
      * @param rut rut del conductor.
      */
-    public void eliminarConductores(String rut){
+    public boolean eliminarConductores(String rut){
         if(mapConductores.containsKey(rut)) {
             mapConductores.remove(rut);
-            System.out.println("El conductor ha sido eliminado correctamente");
-        } else{
-            System.out.println("El conductor no existe");
+            return true;
         }
+        return false;
     }
     
     /**
@@ -197,9 +196,9 @@ public class Bus implements Datos{
     }
     
     /**
-     * Metodo que retorna una cadena con los pasajeros.
-     * @return cadena de pasajeros.
-     */
+    * Metodo que retorna una cadena con los pasajeros.
+    * @return cadena de pasajeros.
+    */
     public String mostrarPasajerosPorRut(){
        String cadena = "";
         for(String rut : mapPasajeros.keySet()){
@@ -209,51 +208,47 @@ public class Bus implements Datos{
     }
     
     /**
-     * Metodo que permite editar al conductor elegido.
-     * @param rut rut del conductor.
-     * @throws java.io.IOException
-     */
-    public void editarConductor(String rut) throws IOException{
+    * Metodo que permite editar al conductor elegido.
+    * @param rut rut del conductor.
+    * @throws java.io.IOException
+    */
+    public boolean editarConductor(String rut, String nombre, String edad, int opc) throws IOException{
         if(mapConductores.containsKey(rut)){
-            BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
-            String nombreNuevo, edadNueva;
-            int nBus;
-            System.out.println("Ingrese la opcion que desea cambiar:");
-            System.out.println("Opcion 1: Nombre");
-            System.out.println("Opcion 2: Edad");
-            int opc = Integer.parseInt(leer.readLine());
-
             switch(opc) {
                 case 1:
                 {
-                    System.out.println("Ingrese nombre nuevo");
-                    nombreNuevo = leer.readLine();
-                    mapConductores.get(rut).setNombre(nombreNuevo); //Metodo verificador
-                    break;
+                    mapConductores.get(rut).setNombre(nombre); //Metodo verificador
+                    return true;
                 }
                 case 2:
                 {
-                    System.out.println("Ingrese edad nueva");
-                    edadNueva = leer.readLine();
-                    mapConductores.get(rut).setEdad(edadNueva); //Metodo verificador
-                    break;
+                    mapConductores.get(rut).setEdad(edad); //Metodo verificador
+                    return true;
                 }
-                default: 
-                {
-                    System.out.println("Invalido");
-                    break;
-                } 
             }
-
+        }
+        return false;
+    }
+    
+    /**
+     * Metodo que verifica si el conductor se encuentra en el mapa.
+     * @param rut rut del conductor.
+     * @return booleano que afirma o rechaza la existencia.
+     */
+    public boolean editarConductorVerificar(String rut){
+        if(mapConductores.containsKey(rut)){
+            return true;
+        }else{
+            return false;
         }
     }
     
-         /**
-     * Metodo que te retorna al conductor menor del mapa conductores.
-     * @param edadMenorGestion
-     * @param rut
-     * @return cadena de String con la clave y la edad del conductor menor
-     */
+    /**
+    * Metodo que te retorna al conductor menor del mapa conductores.
+    * @param edadMenorGestion
+    * @param rut
+    * @return cadena de String con la clave y la edad del conductor menor
+    */
     
     public String[] conductorMenor(int edadMenorGestion,String rut){
         int edad;

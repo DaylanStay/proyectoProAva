@@ -226,7 +226,7 @@ public class Gestion implements Reporte{
     
     /**
      * Metodo que muestra por pantalla la informacion de los conductores y los buses 
-     * @return
+     * @return cadena con los datos de los buses y conductores
      */
     public String mostrarBusesConConductores(){
         String cadena = "";
@@ -258,114 +258,126 @@ public class Gestion implements Reporte{
     
     /**
      * Metodo que elimina a un conductor de su coleccion
+     * @param rut rut del conductor
+     * @return true si se elimina el conductor, false si no se elimina
      * @throws IOException
      */
-    public void eliminarConductor() throws IOException{
-        // Lectura
-        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
-        System.out.println("Ingrese el Rut del conductor");
-        String key;
-        key = opc.readLine();
-        // Eliminación
+    public boolean eliminarConductor(String rut) throws IOException{
         for(int i = 0 ; i < listaBuses.size() ; i++){
-            listaBuses.get(i).eliminarConductores(key);
+            if(listaBuses.get(i).eliminarConductores(rut) == true){
+                return true;
+            }
         }
+        return false;
     }
 
     /**
      * Metodo que elimina a un Bus de su coleccion
+     * @param dato dato que se quiere eliminar
+     * @param opc opcion del usuario
+     * @return true si se elimina el bus, false si no se elimina
      * @throws IOException
      */
-    public void eliminarBus() throws IOException{
-        BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
-        int opc;
-        System.out.println("Eliminar por: \nOpcion 1: numero bus\nOpcion 2: matricula");
-        opc = Integer.parseInt(leer.readLine()); 
-
-        if(opc == 1) {
-            int nBus;
-            System.out.println("Ingrese el numero del bus que desea eliminar");
-            nBus = Integer.parseInt(leer.readLine()); 
+    public boolean eliminarBus(String dato, int opc) throws IOException{
+        if(opc == 2) {
+            int nBus = Integer.parseInt(dato);
             for(int i = 0 ; i < listaBuses.size() ; i++){
                 if(listaBuses.get(i).getNumeroBus() == nBus){
                     listaBuses.remove(i);
+                    return true;
                 } 
             }
-        } else if(opc == 2) {
-            String matricula;
-            System.out.println("Ingrese el numero de la matrícula del bus que desea eliminar");
-            matricula = leer.readLine();
+        } else if(opc == 1) {
             for(int i = 0 ; i < listaBuses.size() ; i++){
-                if(listaBuses.get(i).getMatricula().equals(matricula)){
+                if(listaBuses.get(i).getMatricula().equals(dato)){
                     listaBuses.remove(i);
+                    return true;
                 } 
             }
         }
+        return false;
     }
     
     /**
-     * Metodo que edita a un Conductor de la coleccion 
+     * Metodo que verifica si el conductor se encuentra en la lista.
+     * @param rut rut del conductor.
+     * @return booleano que afirma o rechaza su existencia.
      * @throws IOException
      */
-    public void editarConductor() throws IOException{
-        BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
-        System.out.println("Ingrese rut del conductor que desea modificar");
-        String rut = leer.readLine();   // Reestriccion si no existe el rut
+    public boolean editarConductorVerificar(String rut) throws IOException{
         for(int i = 0 ; i < listaBuses.size() ; i++){
-            listaBuses.get(i).editarConductor(rut);
+            if(listaBuses.get(i).editarConductorVerificar(rut) == true){
+                return true;
+            }
         }
+        return false;
+    }
+    
+    /**
+     * Metodo que permite la modificación del conductor.
+     * @param rut rut del conductor.
+     * @param nombre nombre del conductor.
+     * @param edad edad del conductor.
+     * @param opc opción elegida.
+     * @return booleano que afirma o rechaza su existencia.
+     * @throws IOException
+     */
+    public boolean editarConductor(String rut, String nombre, String edad, int opc) throws IOException{
+        for(int i = 0 ; i < listaBuses.size() ; i++){
+            if(listaBuses.get(i).editarConductor(rut, nombre, edad, opc) == true){
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
      * Metodo que edita a un Bus de su coleccion
+     * @param nBus numero del bus
+     * @param opc opcion del usuario
+     * @param ciudadInicial ciudad donde empieza el bus
+     * @param ciudadFinal ciudad del termino del bus
+     * @param matricula matricula del bus
+     * @return true si se puede modificar, en caso contrario retorna false
      * @throws IOException
      */
-    public void editarBus() throws IOException{
-        BufferedReader leer = new BufferedReader(new InputStreamReader (System.in));
-        System.out.println("Ingrese el numero del bus que desea modificar");
-        int nBus = Integer.parseInt(leer.readLine()); 
-        
+    public boolean editarBus(int nBus, int opc, String ciudadInicial, String ciudadFinal, String matricula) throws IOException{
         for(int i = 0 ; i < listaBuses.size() ; i++){
             if(listaBuses.get(i).getNumeroBus() == nBus) {
-                String aux;
-                int opc;
-                System.out.println("Ingrese la opcion que desea cambiar:");
-                System.out.println("Opcion 1: Ciudad inicial");
-                System.out.println("Opcion 2: Ciudad final");
-                System.out.println("Opcion 3: Matrícula");
-                opc = Integer.parseInt(leer.readLine());
-
                 switch(opc){
                     case 1:
                     {
-                        System.out.println("Ingrese la ciudad inicial");
-                        aux = leer.readLine();
-                        listaBuses.get(i).setCiudadInicio(aux);
-                        break;
+                        listaBuses.get(i).setCiudadInicio(ciudadInicial);
+                        return true;
                     }
                     case 2:
                     {
-                        System.out.println("Ingrese la ciudad final");
-                        aux = leer.readLine();
-                        listaBuses.get(i).setCiudadFinal(aux);
-                        break;
+                        listaBuses.get(i).setCiudadFinal(ciudadFinal);
+                        return true;
                     }
                     case 3:
                     {
-                        System.out.println("Ingrese la nueva matrícula");
-                        aux = leer.readLine();
-                        listaBuses.get(i).setMatricula(aux);
-                        break;
-                    }
-                    default: 
-                    {
-                        System.out.println("Invalido");
-                        break;
+                        listaBuses.get(i).setMatricula(matricula);
+                        return true;
                     }
                 }
-                break;
             }
         }
+        return false;
+    }
+    
+    /**
+     * Metodo que verifica si el bus se encuentra en la lista.
+     * @param nBus numero del bus.
+     * @return booleano que afirma o rechaza su existencia.
+     */
+    public boolean editarBusVerificar(int nBus){
+        for(int i = 0 ; i < listaBuses.size() ; i++){
+            if(listaBuses.get(i).getNumeroBus() == nBus){
+                return true;
+            }
+        }
+        return false;
     }
     
     //Interface Reporte
@@ -387,7 +399,9 @@ public class Gestion implements Reporte{
                 output.write(mostrarPasajeros());
             }
         }catch(IOException e){
-            e.getStackTrace();   
+            e.getStackTrace();
+            System.out.println("Exportación INVALIDA");
+            return;
         }
     }
     
@@ -533,78 +547,41 @@ public class Gestion implements Reporte{
     }
     
     /**
-     * Metodo que muestra por pantalla un conjunto de ciudades donde empieza el recorrido del bus
+     * Metodo que muestra por pantalla un conjunto de ciudades donde empieza el recorrido del bus.
+     * @param partida ciudad donde comienza el recorrido el bus.
+     * @return cadena con toda la información.
      * @throws IOException
      */
-    public void BusesPorViaje() throws IOException {
-        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
-        
-        System.out.println("Ingrese la ciudad de salida");
-        System.out.println("Opciones: ");
-        System.out.println("***************************");
-        MostrarCiudades();
-        System.out.println("***************************");
-        String partida = opc.readLine();
-        System.out.println("***************************");
-        System.out.println("Ciudad De Partida: "+partida);
+    public String BusesPorViaje(String partida) throws IOException {
+        String cadena = "Ciudad De Partida: "+partida+"\n";
           for(int i = 0 ; i < listaBuses.size() ; i++){
-            
             if(listaBuses.get(i).getCiudadInicio().equals(partida)){
-                System.out.println("---------------------------------------");
-                System.out.println("Bus Número: "+listaBuses.get(i).getNumeroBus());
-                System.out.println("Matrícula: "+listaBuses.get(i).getMatricula());
-                System.out.println("Llegada: " +listaBuses.get(i).getCiudadFinal());
+                cadena += "---------------------------------------\n";
+                cadena += "Bus Número: "+listaBuses.get(i).getNumeroBus()+"\n";
+                cadena += "Matrícula: "+listaBuses.get(i).getMatricula()+"\n";
+                cadena += "Llegada: " +listaBuses.get(i).getCiudadFinal()+"\n";
             } 
-            
         }
+        return cadena;
     }
     
     /**
-     * Metodo que muestra por pantalla un conjunto de ciudades donde termina el recorrido del bus
+     * Metodo que muestra por pantalla un conjunto de ciudades donde termina el recorrido del bus.
+     * @param ciudad ciudad donde llega el bus.
+     * @return cadena con toda la información.
      * @throws IOException
      */
-    public void BusesPorViajeDestino() throws IOException {
-        BufferedReader opc = new BufferedReader(new InputStreamReader (System.in));
-        
-        System.out.println("Ingrese la ciudad de Destino");
-        System.out.println("Opciones: ");
-        System.out.println("***************************");
-        MostrarCiudades();
-        System.out.println("***************************");
-        String ciudad = opc.readLine();
-        System.out.println("***************************");
-        System.out.println("Ciudad De Llegada: " +ciudad);
+    public String BusesPorViajeDestino(String ciudad) throws IOException {
+        String cadena = "Ciudad De Llegada: " +ciudad+"\n";
         for(int i = 0 ; i < listaBuses.size() ; i++){
-            
             if(listaBuses.get(i).getCiudadFinal().equals(ciudad)){
-                System.out.println("---------------------------------------");
-                System.out.println("Bus Número: "+listaBuses.get(i).getNumeroBus());
-                System.out.println("Matrícula: "+listaBuses.get(i).getMatricula());
-                System.out.println("Partida: "+listaBuses.get(i).getCiudadInicio());
+                cadena += "---------------------------------------\n";
+                cadena += "Bus Número: "+listaBuses.get(i).getNumeroBus()+"\n";
+                cadena += "Matrícula: "+listaBuses.get(i).getMatricula()+"\n";
+                cadena += "Partida: "+listaBuses.get(i).getCiudadInicio()+"\n";
             } 
-            
         }
-        
-    }
-    
-    /**
-     * Metodo que muestra todas las ciudades donde empiezan y/o terminan los buses.
-     */
-    public void MostrarCiudades(){
-        System.out.println("Valparaiso");
-        System.out.println("Santiago");
-        System.out.println("Concepcion");
-        System.out.println("Copiapo");
-        System.out.println("Iquique");
-        System.out.println("Temuco");
-        System.out.println("Concepcion");
-        System.out.println("Rancagua");
-        System.out.println("PuertoMontt");
-        System.out.println("Chillan");
-        System.out.println("ViñaDelMar");
-        System.out.println("Atacama");
-        System.out.println("Talca");
-        System.out.println("Talcahuano");
+        return cadena;
     }
    
     /**

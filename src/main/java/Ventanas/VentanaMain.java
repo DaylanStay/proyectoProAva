@@ -126,12 +126,11 @@ public final class VentanaMain extends JFrame implements ActionListener {
             
             eliminarConductorBtn.addActionListener(e -> {
                 try {
-                    setVisible(false);
-                    gestion.eliminarConductor();
-                    setVisible(true);
+                    new VentanaEliminarConductor(gestion);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.dispose();
             });
             
             eliminarBusBtn = new JButton();
@@ -141,12 +140,11 @@ public final class VentanaMain extends JFrame implements ActionListener {
             
             eliminarBusBtn.addActionListener(e -> {
                 try {
-                    setVisible(false);
-                    gestion.eliminarBus();
-                    setVisible(true);
+                    new VentanaEliminarBus(gestion);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.dispose();
             });
             
             modificarConductorBtn = new JButton();
@@ -156,12 +154,11 @@ public final class VentanaMain extends JFrame implements ActionListener {
             
             modificarConductorBtn.addActionListener(e -> {
                 try {
-                    setVisible(false);
-                    gestion.editarConductor();
-                    setVisible(true);
+                    new VentanaModificarConductor(gestion);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.dispose();
             });
             
             modificarBusBtn = new JButton();
@@ -171,12 +168,11 @@ public final class VentanaMain extends JFrame implements ActionListener {
             
             modificarBusBtn.addActionListener(e -> {
                 try {
-                    setVisible(false);
-                    gestion.editarBus();
-                    setVisible(true);
+                    new VentanaModificarBus(gestion);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.dispose();
             });
             
             buscarConductorMenorBtn = new JButton();
@@ -229,12 +225,11 @@ public final class VentanaMain extends JFrame implements ActionListener {
             
             destinoBusesBtn.addActionListener(e -> {
                 try {
-                    setVisible(false);
-                    gestion.BusesPorViajeDestino();
-                    setVisible(true);
+                    new VentanaDestinoDeBuses(gestion);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.dispose();
             });
             
             salidaBusesBtn = new JButton();
@@ -244,12 +239,11 @@ public final class VentanaMain extends JFrame implements ActionListener {
             
             salidaBusesBtn.addActionListener(e -> {
                 try {
-                    setVisible(false);
-                    gestion.BusesPorViaje();
-                    setVisible(true);
+                    new VentanaSalidaDeBuses(gestion);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.dispose();
             });
             
             mostrarPasajerosBtn = new JButton();

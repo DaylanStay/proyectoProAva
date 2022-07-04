@@ -20,7 +20,7 @@ public final class VentanaMostrarPasajeros extends JFrame implements ActionListe
     private JScrollPane barraVertical;
     
     /**
-     * Constructor de la ventana mostrar conductores, usado para construir una
+     * Constructor de la ventana mostrar Pasajeros, usado para construir una
      * de las ventanas que ofrece la ventana principal, con sus respectivos
      * valores iniciales.
      *
@@ -42,7 +42,7 @@ public final class VentanaMostrarPasajeros extends JFrame implements ActionListe
     
     /**
      * Metodo que inicializa los distintos componentes que pertenecen a la
-     * ventana Mostrar conductores, ya sean botones, zona de texto y
+     * ventana Mostrar Pasajeros, ya sean botones, zona de texto y
      * demás componentes.
      *
      * @param gestion almacena toda la información y la administra.
